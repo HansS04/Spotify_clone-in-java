@@ -1,0 +1,153 @@
+/* Spotify.css - Temný režim */
+:root {
+    --bg-black: #000000;
+    --bg-dark: #121212;
+    --bg-card: #181818;
+    --bg-hover: #282828;
+    --spotify-green: #1DB954;
+    --text-white: #FFFFFF;
+    --text-gray: #B3B3B3;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    font-family: 'Circular', 'Helvetica Neue', Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden; /* Aby scrolloval jen obsah, ne celá stránka */
+}
+
+/* Layout aplikace (Sidebar vlevo, Obsah vpravo) */
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background-color: var(--bg-black);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-item {
+    color: var(--text-gray);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 10px 0;
+}
+.nav-item:hover { color: var(--text-white); }
+.nav-item.active { color: var(--text-white); }
+
+/* Hlavní obsah */
+.main-content {
+    flex: 1;
+    background: linear-gradient(180deg, #222 0%, var(--bg-dark) 100%);
+    padding: 30px;
+    overflow-y: auto;
+    border-radius: 8px;
+    margin: 8px;
+}
+
+/* Nadpisy */
+h1, h2, h3 { color: var(--text-white); margin-top: 0; }
+
+/* Karty (Formulář, Seznam) */
+.card {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+.card:hover { background-color: var(--bg-hover); }
+
+/* Formuláře */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #333;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    box-sizing: border-box; /* Aby padding nerozbil šířku */
+}
+input:focus, select:focus {
+    outline: 2px solid var(--text-white);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+/* Tlačítka */
+button {
+    background-color: var(--spotify-green);
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 500px; /* Pilulka tvar */
+    padding: 14px 32px;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.1s;
+}
+button:hover { transform: scale(1.05); background-color: #1ed760; }
+button:active { transform: scale(1.0); }
+
+/* Seznam skladeb */
+.song-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+}
+.song-row:hover { background-color: rgba(255,255,255,0.1); }
+
+/* Audio přehrávač - úprava */
+audio {
+    height: 30px;
+    outline: none;
+}
+/* Webkit (Chrome) specifické styly pro audio jsou složité, necháme default,
+   ale na tmavém pozadí budou vypadat dobře. */
+
+/* LOGIN PAGE */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+    flex-direction: column;
+}
+.login-box {
+    background-color: var(--bg-card);
+    padding: 40px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+}
