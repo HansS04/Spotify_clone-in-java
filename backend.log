@@ -1,0 +1,103 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< cz.vsb:spotify-clone >------------------------
+[INFO] Building spotify-clone 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.1:run (default-cli) > test-compile @ spotify-clone >>>
+[WARNING] 6 problems were encountered while building the effective model for org.openjfx:javafx-controls:jar:21 during dependency collection step for project (use -X to see details)
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ spotify-clone ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ spotify-clone ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 23 source files with javac [debug parameters release 25] to target/classes
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by lombok.permit.Permit
+WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ spotify-clone ---
+[INFO] skip non existing resourceDirectory /home/slivka/Desktop/SCHOOL/JAT/spotify-clone/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ spotify-clone ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/test-classes
+[INFO] 
+[INFO] <<< spring-boot:4.0.1:run (default-cli) < test-compile @ spotify-clone <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.1:run (default-cli) @ spotify-clone ---
+[INFO] Attaching agents: []
+SLF4J(W): Class path contains multiple SLF4J providers.
+SLF4J(W): Found provider [ch.qos.logback.classic.spi.LogbackServiceProvider@2d6e8792]
+SLF4J(W): Found provider [org.apache.logging.slf4j.SLF4JServiceProvider@2812cbfa]
+SLF4J(W): See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J(I): Actual provider is of type [ch.qos.logback.classic.spi.LogbackServiceProvider@2d6e8792]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.1)
+
+2026-05-05T09:18:54.635+02:00  INFO 13325 --- [spotify-clone] [           main] c.v.s.SpotifyCloneApplication            : Starting SpotifyCloneApplication using Java 25.0.2 with PID 13325 (/home/slivka/Desktop/SCHOOL/JAT/spotify-clone/target/classes started by slivka in /home/slivka/Desktop/SCHOOL/JAT/spotify-clone)
+2026-05-05T09:18:54.638+02:00  INFO 13325 --- [spotify-clone] [           main] c.v.s.SpotifyCloneApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-05T09:18:55.263+02:00  INFO 13325 --- [spotify-clone] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-05T09:18:55.317+02:00  INFO 13325 --- [spotify-clone] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 5 JPA repository interfaces.
+2026-05-05T09:18:55.761+02:00  INFO 13325 --- [spotify-clone] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-05T09:18:55.773+02:00  INFO 13325 --- [spotify-clone] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-05T09:18:55.773+02:00  INFO 13325 --- [spotify-clone] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-05-05T09:18:55.808+02:00  INFO 13325 --- [spotify-clone] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1132 ms
+2026-05-05T09:18:55.939+02:00  INFO 13325 --- [spotify-clone] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-05T09:18:55.974+02:00  INFO 13325 --- [spotify-clone] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
+2026-05-05T09:18:56.300+02:00  INFO 13325 --- [spotify-clone] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-05T09:18:56.324+02:00  INFO 13325 --- [spotify-clone] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-05T09:18:56.462+02:00  INFO 13325 --- [spotify-clone] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:spotifydb user=SA
+2026-05-05T09:18:56.463+02:00  INFO 13325 --- [spotify-clone] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-05T09:18:56.481+02:00  WARN 13325 --- [spotify-clone] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-05T09:18:56.499+02:00  INFO 13325 --- [spotify-clone] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:spotifydb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: SPOTIFYDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-05T09:18:57.499+02:00  INFO 13325 --- [spotify-clone] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-05T09:18:57.571+02:00  INFO 13325 --- [spotify-clone] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-05T09:18:57.637+02:00  INFO 13325 --- [spotify-clone] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-05T09:18:58.480+02:00  WARN 13325 --- [spotify-clone] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-05T09:18:58.823+02:00  INFO 13325 --- [spotify-clone] [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:spotifydb'
+2026-05-05T09:18:58.865+02:00  INFO 13325 --- [spotify-clone] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-05T09:18:58.871+02:00  INFO 13325 --- [spotify-clone] [           main] c.v.s.SpotifyCloneApplication            : Started SpotifyCloneApplication in 4.567 seconds (process running for 4.883)
+Loading initial data...
+2026-05-05T09:18:59.159+02:00  INFO 13325 --- [spotify-clone] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-05T09:18:59.159+02:00  INFO 13325 --- [spotify-clone] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-05T09:18:59.160+02:00  INFO 13325 --- [spotify-clone] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-05-05T09:18:59.527+02:00  INFO 13325 --- [spotify-clone] [nio-8080-exec-1] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 334 ms
+Data loaded successfully!
+2026-05-05T09:21:43.600+02:00  INFO 13325 --- [spotify-clone] [    file-proc-1] c.v.spotify_clone.service.MusicService   : Saved song 'Cherry leaves' (async)
+------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  08:22 min
+[INFO] Finished at: 2026-05-05T09:18:48+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.1:run (default-cli) on project spotify-clone: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
