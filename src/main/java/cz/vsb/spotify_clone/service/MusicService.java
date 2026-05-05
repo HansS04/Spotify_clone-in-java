@@ -87,13 +87,14 @@ public class MusicService {
 
     @Async("fileProcessingExecutor")
     public void processSongUpload(MultipartFile file, String title, Long albumId, String genre, String username) {
-        // legacy: keep behavior but note MultipartFile may point to a tomcat temp file that
-        // is deleted after request ends. Prefer using processSongUploadBytes which copies bytes first.
-        processSongUploadBytes(null, file.getOriginalFilename(), file.getContentType(), title, albumId, genre, username);
+        // copy bytes and delegate to bytes-based method to avoid Tomcat temp-file deletion
+        byte[] fileBytes = null;
+        try { fileBytes = file.getBytes(); } catch (IOException e) { logger.warn("Failed to copy multipart bytes", e); }
+        processSongUploadBytes(fileBytes, file.getOriginalFilename(), file.getContentType(), null, null, title, albumId, genre, username);
     }
 
     @Async("fileProcessingExecutor")
-    public void processSongUploadBytes(byte[] fileBytes, String originalFilename, String contentType, String title, Long albumId, String genre, String username) {
+    public void processSongUploadBytes(byte[] fileBytes, String originalFilename, String contentType, byte[] coverBytes, String coverContentType, String title, Long albumId, String genre, String username) {
         File tempFile = null;
         try {
             String suffix = ".mp3";
@@ -103,8 +104,6 @@ public class MusicService {
             tempFile = File.createTempFile("upload_", suffix);
             if (fileBytes != null) {
                 Files.write(tempFile.toPath(), fileBytes);
-            } else {
-                // if fileBytes == null fallback: nothing to write, caller should use bytes copy
             }
 
             int durationSeconds = 0;
@@ -126,6 +125,11 @@ public class MusicService {
             }
             song.setContentType(contentType);
             song.setGenre(genre);
+
+            if (coverBytes != null && coverBytes.length > 0) {
+                song.setCoverImage(coverBytes);
+                song.setImageContentType(coverContentType != null ? coverContentType : "image/png");
+            }
 
             if (albumId != null) {
                 Album album = albumRepository.findById(albumId).orElseThrow(() -> new RuntimeException("Album not found"));

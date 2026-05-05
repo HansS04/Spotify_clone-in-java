@@ -1,76 +1,75 @@
 import React, { useState, useEffect } from 'react';
 
-function SongUpload({ onUploadSuccess }) {
+function SongUpload({ user, onUploadSuccess }) {
     const [title, setTitle] = useState('');
-    const [duration, setDuration] = useState('');
-    const [file, setFile] = useState(null);
+    const [genre, setGenre] = useState('');
     const [albums, setAlbums] = useState([]);
-    const [selectedAlbumId, setSelectedAlbumId] = useState('');
+    const [selectedAlbum, setSelectedAlbum] = useState('');
+    const [file, setFile] = useState(null);
+    const [cover, setCover] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/albums')
-            .then(res => res.json())
-            .then(data => {
-                setAlbums(data);
-                if (data.length > 0) setSelectedAlbumId(data[0].id);
-            })
-            .catch(err => console.error("Chyba načítání alb (běží Spring?):", err));
-    }, []);
+        if (user) {
+            fetch(`http://localhost:8080/api/albums/my-albums?username=${user.username}`)
+                .then(res => res.json())
+                .then(data => setAlbums(data))
+                .catch(err => console.error(err));
+        }
+    }, [user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!file || !selectedAlbumId) {
-            alert("Vyber soubor a album!");
-            return;
-        }
+        // allow songs without album; include username as owner
+        if (!file) { alert("Please select a file"); return; }
 
         const formData = new FormData();
         formData.append('title', title);
-        formData.append('duration', duration);
-        formData.append('albumId', selectedAlbumId);
+        formData.append('genre', genre);
+        if (selectedAlbum) formData.append('albumId', selectedAlbum);
+        if (user && user.username) formData.append('username', user.username);
         formData.append('file', file);
+        if (cover) formData.append('cover', cover);
 
-        try {
-            const response = await fetch('http://localhost:8080/api/songs/upload', {
-                method: 'POST',
-                body: formData
-            });
+        const res = await fetch('http://localhost:8080/api/songs/upload', {
+            method: 'POST',
+            body: formData
+        });
 
-            if (response.ok) {
-                alert("✅ Písnička nahrána!");
-                setTitle('');
-                setFile(null);
-                onUploadSuccess();
-            } else {
-                alert("❌ Chyba při nahrávání.");
-            }
-        } catch (error) {
-            console.error("Chyba:", error);
-            alert("❌ Nepodařilo se spojit se serverem.");
+        if (res.ok) {
+            alert("Song uploaded!");
+            setTitle('');
+            setGenre('');
+            setFile(null);
+            setCover(null);
+            onUploadSuccess();
+        } else {
+            alert("Upload failed");
         }
     };
 
     return (
-        <div style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '8px', marginBottom: '20px' }}>
-            <h3>📤 Nahrát novou skladbu</h3>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '400px' }}>
-                <input placeholder="Název skladby" value={title} onChange={e => setTitle(e.target.value)} required />
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text" placeholder="Song Title"
+                value={title} onChange={(e) => setTitle(e.target.value)} required
+            />
 
-                <label>Vyber album:</label>
-                <select value={selectedAlbumId} onChange={e => setSelectedAlbumId(e.target.value)}>
-                    {albums.length === 0 && <option>Žádná alba (spusť Spring DataLoader)</option>}
-                    {albums.map(album => (
-                        <option key={album.id} value={album.id}>{album.name}</option>
-                    ))}
-                </select>
+            <input
+                type="text" placeholder="Genre (e.g. Rock, Pop)"
+                value={genre} onChange={(e) => setGenre(e.target.value)} required
+            />
 
-                <input type="file" accept="audio/*" onChange={e => setFile(e.target.files[0])} required />
+            <select value={selectedAlbum} onChange={(e) => setSelectedAlbum(e.target.value)} required>
+                <option value="">Select Album</option>
+                {albums.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}
+            </select>
 
-                <button type="submit" style={{ padding: '10px', background: '#1DB954', color: 'white', border: 'none', cursor: 'pointer' }}>
-                    Nahrát
-                </button>
-            </form>
-        </div>
+            <input type="file" accept="audio/mp3" onChange={(e) => setFile(e.target.files[0])} required />
+
+            <input type="file" accept="image/*" onChange={(e) => setCover(e.target.files[0])} />
+
+            <button type="submit">Upload</button>
+        </form>
     );
 }
 

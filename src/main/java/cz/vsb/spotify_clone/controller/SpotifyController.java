@@ -121,14 +121,23 @@ public class SpotifyController {
                                              @RequestParam(value = "albumId", required = false) Long albumId,
                                              @RequestParam(value = "username", required = false) String username,
                                              @RequestParam("genre") String genre,
-                                             @RequestParam("file") MultipartFile file) {
+                                             @RequestParam("file") MultipartFile file,
+                                             @RequestParam(value = "cover", required = false) MultipartFile cover) {
         try {
             // copy file bytes now (Tomcat may delete multipart temp files when request ends)
             byte[] fileBytes = file.getBytes();
             String originalFilename = file.getOriginalFilename();
             String contentType = file.getContentType();
+
+            byte[] coverBytes = null;
+            String coverContentType = null;
+            if (cover != null && !cover.isEmpty()) {
+                coverBytes = cover.getBytes();
+                coverContentType = cover.getContentType();
+            }
+
             // delegate heavy processing to async executor using an in-memory copy
-            musicService.processSongUploadBytes(fileBytes, originalFilename, contentType, title, albumId, genre, username);
+            musicService.processSongUploadBytes(fileBytes, originalFilename, contentType, coverBytes, coverContentType, title, albumId, genre, username);
             return ResponseEntity.accepted().body("Upload started");
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Error");
