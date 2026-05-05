@@ -64,9 +64,11 @@ function SongUpload({ user, onUploadSuccess }) {
                 {albums.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}
             </select>
 
-            <input type="file" accept="audio/mp3" onChange={(e) => setFile(e.target.files[0])} required />
+            <label style={{display: 'block', marginTop: '10px'}}>Audio file (MP3)</label>
+            <input name="file" type="file" accept="audio/*,audio/mpeg" onChange={(e) => setFile(e.target.files[0])} required />
 
-            <input type="file" accept="image/*" onChange={(e) => setCover(e.target.files[0])} />
+            <label style={{display: 'block', marginTop: '10px'}}>Cover image (optional)</label>
+            <input name="cover" type="file" accept="image/*" onChange={(e) => setCover(e.target.files[0])} />
 
             <button type="submit">Upload</button>
         </form>
